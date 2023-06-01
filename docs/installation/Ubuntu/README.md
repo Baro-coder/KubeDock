@@ -359,9 +359,3 @@ Check listen IPv4 listen ports list:
 ``` console
 sudo netstat -lpnt4 | tr -s ' ' | cut -d ' ' -f4 | cut -d ':' -f2 | sort -h | tail -n +3
 ```
-
----
-
-## **Example**
-
-> To develop...
