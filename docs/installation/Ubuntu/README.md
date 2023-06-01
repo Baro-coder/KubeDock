@@ -8,10 +8,10 @@
 
 Four **Ubuntu Server 22 LTS** systems with following details:
 
-- **Master Node** : 0 : *ubuntu-kube-master* : 192.168.60.40
-- **Worker Node** : 1 : *ubuntu-kube-worker-1* : 192.168.60.51
-- **Worker Node** : 2 : *ubuntu-kube-worker-2* : 192.168.60.52
-- **Worker Node** : 3 : *ubuntu-kube-worker-3* : 192.168.60.53
+- **Master Node** : 0 : *ubuntu-kube-master* : 192.168.0.40
+- **Worker Node** : 1 : *ubuntu-kube-worker-1* : 192.168.0.51
+- **Worker Node** : 2 : *ubuntu-kube-worker-2* : 192.168.0.52
+- **Worker Node** : 3 : *ubuntu-kube-worker-3* : 192.168.0.53
 
 There is set up administrative account at every system: `kadmin`.
 
@@ -24,11 +24,6 @@ All the preparation operation must be run as root at all nodes.
 ### **Networking**
 
 Run on all nodes:
-
-- NAT
-- Host-Only (vboxnet)
-
-#### **NAT and internal static IP**
 
 *Interfaces:*
 
@@ -359,9 +354,3 @@ Check listen IPv4 listen ports list:
 ``` console
 sudo netstat -lpnt4 | tr -s ' ' | cut -d ' ' -f4 | cut -d ':' -f2 | sort -h | tail -n +3
 ```
-
----
-
-## **Example**
-
-> To develop...
