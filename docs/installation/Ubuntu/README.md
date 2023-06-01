@@ -13,7 +13,7 @@ Four **Ubuntu Server 22 LTS** systems with following details:
 - **Worker Node** : 2 : *ubuntu-kube-worker-2* : 192.168.60.52
 - **Worker Node** : 3 : *ubuntu-kube-worker-3* : 192.168.60.53
 
-There is set up administrative account at every system: `kubadmin`.
+There is set up administrative account at every system: `kadmin`.
 
 ---
 
@@ -174,7 +174,9 @@ sudo cp -a packaging/systemd/* /etc/systemd/system &&
 sudo sed -i -e 's,/usr/bin/cri-dockerd,/usr/local/bin/cri-dockerd,' /etc/systemd/system/cri-docker.service &&
 sudo systemctl daemon-reload &&
 sudo systemctl enable cri-docker.service &&
-sudo systemctl enable --now cri-docker.socket
+sudo systemctl enable --now cri-docker.socket &&
+cd .. &&
+rm -fr cri-dockerd
 ```
 
 ---
@@ -278,6 +280,18 @@ To add worker nodes to cluster run command this command on worker node (paramete
 
 ``` console
 sudo kubeadm join 192.168.0.40:6443 --token ht9fqt.am7jhy11q24tsod2  --discovery-token-ca-cert-hash sha256:8698a3a02659b95a44525e2fee762b8a15e3710b837b6cc276877fd6325a33b4 --cri-socket unix:///var/run/cri-dockerd.sock
+```
+
+If you want to generate join command to add other nodes, at first generate new token:
+
+``` console
+sudo kubeadm token generate
+```
+
+Then produce join command:
+
+``` console
+sudo kubeadm token create <TOKEN_GENERATE_OUTPUT> --print-join-command
 ```
 
 ---
